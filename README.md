@@ -1,159 +1,81 @@
-# WeMemory
+# Wemory
 
 **Shared, persistent memory for AI-powered teams.**
 
-AI agents today create knowledge silos — each only knows what its individual user has shared. WeMemory is persistent, shared memory across your entire company: every session, meeting, and document compounds into context that makes each new AI interaction as informed as if it'd been there for every conversation.
+Every AI interaction your team has — coding sessions, meetings, documents, decisions — creates knowledge that disappears the moment the session ends. Wemory captures it all and makes it available to every future interaction, for everyone on the team.
+
+The result: AI agents that know what the entire company knows.
 
 ## The Problem
 
-A single person with AI agents can run an entire company. But the moment a second person joins, context breaks. Each agent only knows what its user told it. Meetings produce transcripts nobody re-reads. Documents aren't indexed. Decisions made in one session are invisible to the next.
+One person with AI can run an entire company. But with two people, context breaks. Each agent only knows what its own user told it. Meetings produce transcripts nobody re-reads. Decisions made in one session are invisible to the next.
 
-The result: **knowledge silos that grow with every interaction**, repeated context, contradicted decisions, and lost institutional memory.
+**Knowledge silos grow with every interaction.** Context gets repeated. Decisions get contradicted. Institutional memory is lost.
 
-## What WeMemory Does
+## What Wemory Does
 
-WeMemory creates a **persistent, shared knowledge base** for your entire organization. Every piece of work — AI coding sessions, meetings, documents, decisions — is automatically captured, structured, and semantically indexed.
+Wemory gives your team a **collective memory layer** that sits between your people and their AI agents. Every piece of work is automatically captured, structured, and made retrievable — so each new interaction starts with the full picture, not a blank slate.
 
-The key insight: **every new AI interaction starts with full context** built from everything the company has ever produced. Agents don't just know what you told them — they know what everyone knows.
+- A developer starts a coding session and immediately has context from every past session on the topic — across the whole team
+- A meeting ends and its decisions, action items, and context are already searchable by everyone's AI agents
+- A document is uploaded and its key information becomes part of the shared knowledge, instantly
+- A decision made three months ago surfaces automatically when it's relevant again
 
-## How It Works
+The more your team uses AI, the smarter every interaction gets.
 
-1. **Capture** — AI sessions are automatically summarized. Meetings are transcribed and structured. Documents are analyzed and indexed.
-2. **Structure** — Decisions, open questions, and next steps are extracted automatically. Knowledge items are versioned with lifecycle management.
-3. **Retrieve** — At the start of each new session, semantic search surfaces relevant context from the entire knowledge base. The agent receives shared memory before you type a single word.
-4. **Compound** — Every interaction makes the next one smarter. Context accumulates across people, projects, and time.
+## Capabilities
 
-## Features
+### AI Session Memory
+Every AI coding session is automatically captured as a structured summary. Decisions, open questions, and next steps are extracted and become part of the shared knowledge base. When anyone starts a new session, relevant context from past work is automatically surfaced.
 
-- **Automatic AI Session Capture** — Every coding session generates a structured summary (decisions, open questions, next steps) pushed to the shared knowledge base
-- **Intelligent Session Context** — Semantic search at session start provides relevant context from past sessions across the entire team
-- **Meeting Ingestion** — Transcripts from Google Meet (via Gemini) or any source are automatically structured and stored
-- **File Scanning & Summarization** — Uploaded files are analyzed by AI, summarized, and semantically indexed
-- **Semantic Search** — Vector search (Voyage AI + pgvector) across sessions, knowledge, and files — find anything by meaning
-- **Knowledge Lifecycle** — Durable decisions and conventions with supersession and versioning
-- **Auto-Update** — Client self-updates on every launch via a release system with SHA256 verification
-- **Integrations** — Google Meet, Google Drive, Gmail, Telegram bot, Claude Code
+### Meeting Intelligence
+Meeting transcripts — from Google Meet, or any other source — are ingested, structured, and indexed. Participants, decisions, and follow-ups are extracted automatically. No manual note-taking, no lost context.
 
-## Installation
+### Document & File Intelligence
+Upload any document, codebase, or file. Wemory analyzes and indexes it so the content becomes searchable by meaning — not just keywords.
+
+### Semantic Search
+Find anything by meaning. Ask a question in natural language, and Wemory surfaces the most relevant sessions, knowledge, and files — even if the exact words don't match.
+
+### Knowledge Lifecycle
+Important decisions and conventions are captured as durable knowledge items. As things evolve, knowledge can be versioned, superseded, or retired — so your memory stays current, not cluttered.
+
+### Integrations
+- **Claude Code** — Native integration for AI coding sessions
+- **Google Workspace** — Automatic ingestion from Google Meet, Drive, and Gmail
+- **Telegram** — Query the shared memory directly from your team chat
+- **API** — RESTful API for custom integrations
+
+### Zero-Friction Deployment
+Install in one command. The client self-updates automatically. Zero external dependencies beyond bash, curl, and python3.
+
+## Getting Started
 
 ```bash
 git clone https://github.com/legasicrypto/we-memory.git
 cd we-memory
 bash install.sh
-echo 'export PATH="$HOME/bin:$PATH"' >> ~/.zshrc && source ~/.zshrc
 ```
 
-### Configuration
-
-Set your API URL (provided by your admin):
+Then authenticate:
 
 ```bash
-export LEGASI_API_URL="https://your-instance.example.com"
+wemory-login
 ```
 
-Authenticate:
+## Quick Reference
 
-```bash
-legasi-login
-```
-
-## Commands
-
-| Command | Description |
-|---------|-------------|
-| `legasi-session` | Launch an AI coding session with auto-capture |
-| `legasi-push` | Push a session summary to the shared memory |
-| `legasi-query smart "query"` | Semantic search across all knowledge |
-| `legasi-query search "query"` | Text search (keyword matching) |
-| `legasi-query sessions <project>` | List sessions by project |
-| `legasi-query knowledge <project>` | List knowledge items by project |
-| `legasi-knowledge <project> <title> <content>` | Create a knowledge item |
-| `legasi-knowledge-interactive` | Interactive knowledge item creation |
-| `legasi-upload <file> <project>` | Upload a file |
-| `legasi-ingest --file transcript.txt` | Ingest a meeting transcript |
-| `legasi-login` | Authenticate with the API |
-
-## API Reference
-
-Base URL: `https://your-instance.example.com`
-
-All endpoints require `X-API-Key` header (except health check and file downloads).
-
-### Sessions
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/session-note` | Create a session note |
-| `GET` | `/sessions/{project}` | List sessions by project |
-| `DELETE` | `/sessions/{id}` | Delete a session |
-
-**Session Note Schema:**
-
-```json
-{
-  "project": "engineering",
-  "author": "user@company.com",
-  "summary": "2-5 sentence summary of what was accomplished",
-  "decisions": ["Key decision 1", "Key decision 2"],
-  "open_questions": ["Unresolved question"],
-  "next_steps": ["Concrete next action"],
-  "files_modified": ["path/to/file.ts"],
-  "commits": ["abc1234"],
-  "tags": ["dev", "feature"],
-  "scope": "project"
-}
-```
-
-- `scope`: `personal` | `project` | `company`
-- Duplicate detection: returns `409 Conflict` when embedding similarity >= 0.95
-
-### Knowledge Items
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/knowledge-item` | Create a knowledge item |
-| `GET` | `/knowledge/{project}` | List knowledge items (add `?include_inactive=true` for superseded items) |
-| `DELETE` | `/knowledge/{id}` | Delete a knowledge item |
-| `POST` | `/knowledge/{id}/supersede` | Replace a knowledge item with a newer one |
-
-Key decisions from sessions are automatically extracted as knowledge items.
-
-### Search
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/semantic-search?q={query}&limit={n}&project={slug}` | Semantic search (vector-based, recommended) |
-| `GET` | `/search?q={query}` | Text search (keyword matching) |
-
-### Files
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/upload` | Upload a file (multipart form) |
-| `GET` | `/files?project={slug}` | List files |
-| `GET` | `/files/{uuid}` | Download a file |
-| `DELETE` | `/files/{uuid}` | Delete a file |
-
-### Transcripts
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/ingest-transcript` | Ingest and structure a meeting transcript |
-
-### Administration
-
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `GET` | `/health` | Health check (no auth required) |
-| `GET` | `/projects` | List all projects |
-| `GET` | `/members` | List all team members |
-
-## Stack
-
-- **Client**: Bash, Python stdlib (zero external dependencies)
-- **Server**: FastAPI, PostgreSQL 16, pgvector, Voyage AI, Claude API
-- **Infrastructure**: nginx, systemd, Let's Encrypt (HTTPS)
-- **Integrations**: Google Apps Script (Meet/Drive/Gmail), Telegram bot
+| Command | What it does |
+|---------|--------------|
+| `wemory-session` | Start an AI session with shared memory |
+| `wemory-push` | Push a session summary |
+| `wemory-query smart "your question"` | Search by meaning |
+| `wemory-query search "keyword"` | Search by keyword |
+| `wemory-query sessions <project>` | Browse sessions |
+| `wemory-query knowledge <project>` | Browse knowledge items |
+| `wemory-knowledge <project> <title> <content>` | Add a knowledge item |
+| `wemory-upload <file> <project>` | Upload a file |
+| `wemory-ingest --file transcript.txt` | Ingest a meeting transcript |
 
 ## License
 
