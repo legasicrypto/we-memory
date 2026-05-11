@@ -1,0 +1,27 @@
+Copyright (c) 2026 Legasi SAS. All rights reserved.
+
+This software and associated documentation files (the "Software") are the
+proprietary property of Legasi SAS.
+
+Permission is hereby granted to use the client-side scripts included in this
+repository for the sole purpose of connecting to a WeMemory-compatible API
+instance.
+
+The following restrictions apply:
+
+1. You may not copy, modify, merge, publish, distribute, sublicense, or sell
+   copies of the server-side Software without explicit written permission from
+   Legasi SAS.
+
+2. You may not use the Software to build a competing product or service.
+
+3. The client scripts may be freely used, modified, and distributed for
+   personal or internal business use.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
